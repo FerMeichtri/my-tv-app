@@ -1,10 +1,14 @@
 import axios from "axios"
 import { types } from "../types/types"
 
-export const fetchShows = (name) => (dispatch) => {
-  const url = 'https://api.tvmaze.com/search/shows'
-  
   // TODO: improve this adding configuration files
+const SHOW_API_BASE_URL = 'https://api.tvmaze.com'
+
+export const fetchShows = (name) => (dispatch) => {
+  const url = `${SHOW_API_BASE_URL}/search/shows`
+
+  dispatch(addShowsLoading());
+
   axios.get(url, {
     params: {
       q: name
@@ -15,10 +19,9 @@ export const fetchShows = (name) => (dispatch) => {
 }
 
 export const getShowById = (id) => (dispatch) => {
-  const url = `https://api.tvmaze.com/shows/${id}`
-
-    // TODO: improve this adding configuration files
-    axios.get(url)
+  const url = `${SHOW_API_BASE_URL}/shows/${id}`
+  
+  axios.get(url)
     .then(({ data: show }) => {
       dispatch(addShowDetail(show))
     })
@@ -36,4 +39,8 @@ export const addShowDetail = (show) => ({
   payload: {
     show
   }
+});
+
+export const addShowsLoading = () => ({
+  type: types.addShowsLoading
 });

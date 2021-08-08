@@ -1,10 +1,19 @@
 import { types } from "../types/types";
 
-export const addShowsReducer = (state = {}, action) => {
+export const addShowsReducer = (state = { isLoading: false, shows: [] }, action) => {
   switch (action.type) {
     case types.addShows:
       return {
-        shows: action.payload.shows
+        ...state,
+        isLoading: false,
+        shows: action.payload.shows,
+      }
+
+    case types.addShowsLoading: 
+      return {
+        ...state,
+        isLoading: true,
+        shows: [],
       }
   
     default:

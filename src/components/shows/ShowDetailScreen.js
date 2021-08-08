@@ -12,7 +12,7 @@ export const ShowDetailScreen = ({ history }) => {
 
   useEffect(() => {
     dispatch(getShowById(showId))
-  }, [ showId ]);
+  }, [ showId, dispatch ]);
 
   const { show } = useSelector( state => state.showDetail );
 

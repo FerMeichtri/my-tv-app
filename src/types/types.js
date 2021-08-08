@@ -1,4 +1,7 @@
 export const types = {
   addShows: '[Add] Shows',
-  addShowDetail: '[Add] Show Detail'
+  addShowsLoading: '[Loading] Shows',
+
+  addShowDetail: '[Add] Show Detail',
+  addShowDetailLoading: '[Loading] Show Detail',
 }

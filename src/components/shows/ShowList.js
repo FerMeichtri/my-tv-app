@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector} from 'react-redux';
-import './styles/ShowList.css'
+import { useDispatch, useSelector } from 'react-redux';
+import './styles/ShowList.css';
+import { Spinner } from 'react-bootstrap';
 
 import { ShowCard } from './ShowCard';
 import { useForm } from '../../hooks/useForm';
@@ -12,7 +13,7 @@ export const ShowList = ({ history }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { shows } = useSelector( state => state.shows );
+  const { shows, isLoading } = useSelector( state => state.shows );
 
   const { q = '' } = queryString.parse( location.search );
 
@@ -20,6 +21,13 @@ export const ShowList = ({ history }) => {
     searchText: q
   });
   const { searchText } = formValues;
+
+  // load shows the first time 
+  // if a query param is received
+  // in the url
+  useEffect(() => {
+    dispatch(fetchShows(searchText))
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -29,8 +37,7 @@ export const ShowList = ({ history }) => {
   }
 
   return (
-    <div className="container">
-                
+    <div className="container"> 
       <div className="form-container">
           <form onSubmit={ handleSearch }>
               <input 
@@ -60,16 +67,19 @@ export const ShowList = ({ history }) => {
       </div>
 
       <div className="shows-container">
-        {
-          (shows && shows.length > 0) && 
-          shows.map(showItem => {
-            const show = showItem.show;
-            return <ShowCard 
-              key = { show.id }
-              { ...show }
-            />
-          })
-        }
+      {
+        (isLoading) && <Spinner animation="border" />
+      }
+      {
+        (!isLoading && shows && shows.length > 0) &&
+        shows.map(showItem => {
+          const show = showItem.show;
+          return <ShowCard 
+            key = { show.id }
+            { ...show }
+          />
+        })
+      }
       </div>
     </div>
   )
