@@ -1,17 +1,27 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-export const ShowCard = () => {
+export const ShowCard = ({
+  id,
+  name,
+  summary,
+  image
+}) => {
+  // some shows do not have image
+  // show a generic image for them
+  const imgSrc = (!image) ? 'assets/images/tvShow.png' :  image.medium || image.original || 'assets/images/tvShow.png';
+
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://static.tvmaze.com/uploads/images/medium_portrait/0/2400.jpg" />
+      <Card.Img variant="top" className='img-thumbnail' src={ imgSrc } />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{ name }</Card.Title>
         <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
+          {
+            (!summary) ? 'No description was provided' : summary.replace(/<[^>]*>?/gm, '')
+          }
         </Card.Text>
-        <Button variant="dark">Ver mas...</Button>
+        <Button variant="dark">Ver mas</Button>
       </Card.Body>
     </Card>
   )

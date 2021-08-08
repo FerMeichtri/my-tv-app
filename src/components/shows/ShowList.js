@@ -1,10 +1,76 @@
 import React from 'react';
-import { ShowCard } from './ShowCard';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
 
-export const ShowList = () => {
+import { ShowCard } from './ShowCard';
+import { useForm } from '../../hooks/useForm';
+import { fetchShows } from '../../actions/search';
+
+export const ShowList = ({ history }) => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const { shows } = useSelector( state => state.shows );
+
+  const { q = '' } = queryString.parse( location.search );
+
+  const [ formValues, handleInputChange ] = useForm({
+    searchText: q
+  });
+  const { searchText } = formValues;
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    history.push(`?q=${ searchText }`);
+    
+    dispatch(fetchShows(searchText))
+  }
+
+  // const isValidForm = () => {
+  // TODO: user npm i validator
+  // };
+
   return (
-    <div>
-      <ShowCard></ShowCard>
+    <div className="row">
+                
+      <div className="row">
+          <h4> Search Form </h4>
+          <hr />
+
+          <form onSubmit={ handleSearch }>
+              <input 
+                  type="text"
+                  placeholder="Search a Show"
+                  className="form-control"
+                  name="searchText"
+                  autoComplete="off"
+                  value={ searchText }
+                  onChange={ handleInputChange }
+              />
+
+              <button
+                  type="submit"
+                  className="btn m-1 btn-block btn-outline-primary"
+              >
+                  Search...
+              </button>
+          </form>
+
+
+      </div>
+      <div className="row">
+        {
+          (shows && shows.length > 0) && 
+          shows.map(showItem => {
+            const show = showItem.show;
+            return <ShowCard 
+              key = { show.id }
+              { ...show }
+            />
+          })
+        }
+      </div>
     </div>
   )
 }
