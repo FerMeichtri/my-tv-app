@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import './styles/ShowCard.css';
@@ -27,7 +27,7 @@ export const ShowCard = ({
             }
         </Card.Text>
         <Link className='btn btn-dark' to={`./shows/${id}`}>
-            Ver mas
+            More info
         </Link>
       </Card.Body>
     </Card>

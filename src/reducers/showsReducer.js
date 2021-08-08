@@ -11,3 +11,15 @@ export const addShowsReducer = (state = {}, action) => {
       return state;
   }
 }
+
+export const addShowDetailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.addShowDetail:
+      return {
+        show: action.payload.show
+      }
+  
+    default:
+      return state;
+  }
+}

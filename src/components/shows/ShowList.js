@@ -6,7 +6,7 @@ import './styles/ShowList.css'
 
 import { ShowCard } from './ShowCard';
 import { useForm } from '../../hooks/useForm';
-import { fetchShows } from '../../actions/search';
+import { fetchShows } from '../../actions/show';
 
 export const ShowList = ({ history }) => {
   const location = useLocation();
@@ -28,10 +28,6 @@ export const ShowList = ({ history }) => {
     dispatch(fetchShows(searchText))
   }
 
-  // const isValidForm = () => {
-  // TODO: user npm i validator
-  // };
-
   return (
     <div className="container">
                 
@@ -39,7 +35,7 @@ export const ShowList = ({ history }) => {
           <form onSubmit={ handleSearch }>
               <input 
                   type="text"
-                  placeholder="Search a Show"
+                  placeholder="Search a show"
                   className="form-control"
                   name="searchText"
                   autoComplete="off"

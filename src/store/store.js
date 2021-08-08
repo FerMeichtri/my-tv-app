@@ -1,9 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { addShowsReducer } from "../reducers/searchReducer";
+import { addShowDetailReducer, addShowsReducer } from "../reducers/showsReducer";
 import thunk from "redux-thunk";
 
 const reducers = combineReducers({
   shows: addShowsReducer,
+  showDetail: addShowDetailReducer
 });
 
 export const store = createStore(
