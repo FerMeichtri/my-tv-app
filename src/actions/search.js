@@ -4,7 +4,7 @@ import { types } from "../types/types"
 export const fetchShows = (name) => (dispatch) => {
   const url = 'https://api.tvmaze.com/search/shows'
   
-  // TODO: improve this
+  // TODO: improve this adding configuration files
   axios.get(url, {
     params: {
       q: name

@@ -2,6 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
+import './styles/ShowList.css'
 
 import { ShowCard } from './ShowCard';
 import { useForm } from '../../hooks/useForm';
@@ -32,12 +33,9 @@ export const ShowList = ({ history }) => {
   // };
 
   return (
-    <div className="row">
+    <div className="container">
                 
-      <div className="row">
-          <h4> Search Form </h4>
-          <hr />
-
+      <div className="form-container">
           <form onSubmit={ handleSearch }>
               <input 
                   type="text"
@@ -48,18 +46,24 @@ export const ShowList = ({ history }) => {
                   value={ searchText }
                   onChange={ handleInputChange }
               />
-
-              <button
-                  type="submit"
-                  className="btn m-1 btn-block btn-outline-primary"
-              >
-                  Search...
-              </button>
+              {/* <div>
+                <button
+                    type="submit"
+                    className="btn m-1 btn-block btn-dark"
+                >
+                    Buscar
+                </button>
+                <button
+                    type="submit"
+                    className="btn m-1 btn-block btn-dark"
+                >
+                    Limpiar
+                </button>
+              </div> */}
           </form>
-
-
       </div>
-      <div className="row">
+
+      <div className="shows-container">
         {
           (shows && shows.length > 0) && 
           shows.map(showItem => {
