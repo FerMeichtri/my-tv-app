@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Navbar } from '../components/common/Navbar';
 import { ShowList } from '../components/shows/ShowList';
 import { ShowDetailScreen } from '../components/shows/ShowDetailScreen';
 

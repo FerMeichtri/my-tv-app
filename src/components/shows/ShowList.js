@@ -38,13 +38,13 @@ export const ShowList = ({ history }) => {
 
   return (
     <div className="container"> 
-      <div className="form-container">
+      <div className="border rounded form-container">
           <h2>Find your favorite show</h2>
-          <form className onSubmit={ handleSearch }>
+          <form className='d-flex justify-content-center' onSubmit={ handleSearch }>
               <input 
                   type="text"
                   placeholder="Search a show"
-                  className="form-control"
+                  className="w-75 p-3 form-control"
                   name="searchText"
                   autoComplete="off"
                   value={ searchText }
