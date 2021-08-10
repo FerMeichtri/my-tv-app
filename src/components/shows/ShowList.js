@@ -3,11 +3,11 @@ import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './styles/ShowList.css';
-import { Spinner } from 'react-bootstrap';
 
 import { ShowCard } from './ShowCard';
 import { useForm } from '../../hooks/useForm';
 import { fetchShows } from '../../actions/show';
+import { Loading } from '../common/Loading';
 
 export const ShowList = ({ history }) => {
   const location = useLocation();
@@ -39,7 +39,8 @@ export const ShowList = ({ history }) => {
   return (
     <div className="container"> 
       <div className="form-container">
-          <form onSubmit={ handleSearch }>
+          <h2>Find your favorite show</h2>
+          <form className onSubmit={ handleSearch }>
               <input 
                   type="text"
                   placeholder="Search a show"
@@ -49,37 +50,30 @@ export const ShowList = ({ history }) => {
                   value={ searchText }
                   onChange={ handleInputChange }
               />
-              {/* <div>
-                <button
-                    type="submit"
-                    className="btn m-1 btn-block btn-dark"
-                >
-                    Buscar
-                </button>
-                <button
-                    type="submit"
-                    className="btn m-1 btn-block btn-dark"
-                >
-                    Limpiar
-                </button>
-              </div> */}
           </form>
       </div>
 
       <div className="shows-container">
-      {
-        (isLoading) && <Spinner animation="border" />
-      }
-      {
-        (!isLoading && shows && shows.length > 0) &&
-        shows.map(showItem => {
-          const show = showItem.show;
-          return <ShowCard 
-            key = { show.id }
-            { ...show }
-          />
-        })
-      }
+        {
+          (isLoading) && <Loading />
+        }
+        {
+          (!isLoading && q !== '' && shows.length === 0) &&
+          <div className='no-data-card'>
+              <img src="assets/images/tvShow.png" alt='Not Shows found' />
+              <h2>Not found results for your search</h2>
+          </div>
+        }
+        {
+          (!isLoading && shows && shows.length > 0) &&
+          shows.map(showItem => {
+            const show = showItem.show;
+            return <ShowCard 
+              key = { show.id }
+              { ...show }
+            />
+          })
+        }
       </div>
     </div>
   )

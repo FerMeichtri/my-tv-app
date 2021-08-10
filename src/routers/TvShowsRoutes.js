@@ -6,9 +6,6 @@ import { ShowDetailScreen } from '../components/shows/ShowDetailScreen';
 
 export const TvShowsRoutes = () => {
     return (
-        <>
-            < Navbar />
-
             <div className="container mt-2">
                 <Switch>
                     <Route exact path="/shows" component={ ShowList } />
@@ -17,6 +14,5 @@ export const TvShowsRoutes = () => {
                     <Redirect to="/shows" />
                 </Switch>
             </div>
-        </>
     )
 }

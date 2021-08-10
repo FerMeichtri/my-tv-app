@@ -21,11 +21,19 @@ export const addShowsReducer = (state = { isLoading: false, shows: [] }, action)
   }
 }
 
-export const addShowDetailReducer = (state = {}, action) => {
+export const addShowDetailReducer = (state = { isLoading: false }, action) => {
   switch (action.type) {
     case types.addShowDetail:
       return {
-        show: action.payload.show
+        ...state,
+        isLoading: false,
+        show: action.payload.show,
+      }
+    
+    case types.addShowDetailLoading:
+      return {
+        ...state,
+        isLoading: true,
       }
   
     default:

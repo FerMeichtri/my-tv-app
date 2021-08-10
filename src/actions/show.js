@@ -21,6 +21,8 @@ export const fetchShows = (name) => (dispatch) => {
 export const getShowById = (id) => (dispatch) => {
   const url = `${SHOW_API_BASE_URL}/shows/${id}`
   
+  dispatch(addShowDetailLoading());
+
   axios.get(url)
     .then(({ data: show }) => {
       dispatch(addShowDetail(show))
@@ -43,4 +45,8 @@ export const addShowDetail = (show) => ({
 
 export const addShowsLoading = () => ({
   type: types.addShowsLoading
+});
+
+export const addShowDetailLoading = () => ({
+  type: types.addShowDetailLoading
 });

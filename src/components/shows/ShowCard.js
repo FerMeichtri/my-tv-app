@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import './styles/ShowCard.css';
 
 export const ShowCard = ({
@@ -13,8 +12,6 @@ export const ShowCard = ({
   // some shows do not have image
   // show a generic image for them
   const imgSrc = (!image) ? 'assets/images/tvShow.png' :  image.medium || image.original || 'assets/images/tvShow.png';
-
-
 
   return (
     <Card className='card'>
