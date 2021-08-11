@@ -13,7 +13,6 @@ export const addShowsReducer = (state = { isLoading: false, shows: [] }, action)
       return {
         ...state,
         isLoading: true,
-        shows: [],
       }
 
     case types.addShowsError: 
