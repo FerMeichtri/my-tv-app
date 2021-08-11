@@ -15,13 +15,20 @@ export const addShowsReducer = (state = { isLoading: false, shows: [] }, action)
         isLoading: true,
         shows: [],
       }
+
+    case types.addShowsError: 
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
   
     default:
       return state;
   }
 }
 
-export const addShowDetailReducer = (state = { isLoading: false }, action) => {
+export const addShowDetailReducer = (state = { isLoading: false, error: undefined }, action) => {
   switch (action.type) {
     case types.addShowDetail:
       return {
@@ -34,6 +41,13 @@ export const addShowDetailReducer = (state = { isLoading: false }, action) => {
       return {
         ...state,
         isLoading: true,
+      }
+      
+    case types.addShowDetailError: 
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
       }
   
     default:

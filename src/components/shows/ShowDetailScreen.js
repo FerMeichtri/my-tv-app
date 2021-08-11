@@ -7,6 +7,7 @@ import { BsStarHalf, BsFilm, BsFillChatQuoteFill, BsFillInfoCircleFill } from "r
 import { Loading } from '../common/Loading';
 import './styles/ShowDetailScreen.css';
 import defaultImg from '../../assets/images/tvShow.png';
+import { NotFound } from '../common/NotFound';
 
 export const ShowDetailScreen = ({ history }) => {
   const { showId } = useParams();
@@ -16,7 +17,7 @@ export const ShowDetailScreen = ({ history }) => {
     dispatch(getShowById(showId))
   }, [ showId, dispatch ]);
 
-  const { show, isLoading } = useSelector( state => state.showDetail );
+  const { show, isLoading, error } = useSelector( state => state.showDetail );
 
   const handleReturn = () => {
     if( history.length <=2 ) {
@@ -30,6 +31,10 @@ export const ShowDetailScreen = ({ history }) => {
     <div>
       {
         (isLoading) && <Loading />
+      }
+      {
+        (!isLoading && error) && 
+        <NotFound />
       }
       {
         (!isLoading && show) &&

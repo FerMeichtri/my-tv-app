@@ -61,7 +61,7 @@ export const ShowList = ({ history }) => {
           (!isLoading && q !== '' && shows.length === 0) &&
           <div className='no-data-card'>
               <img src="assets/images/tvShow.png" alt='Not Shows found' />
-              <h2>Not found results for your search</h2>
+              <h2>Not results for your search</h2>
           </div>
         }
         {

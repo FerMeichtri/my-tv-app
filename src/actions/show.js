@@ -11,10 +11,12 @@ export const fetchShows = (name) => (dispatch) => {
 
   axios.get(url, {
     params: {
-      q: name
+      q: name,
     }
   }).then(({ data: shows }) => {
     dispatch(addShows(shows))
+  }).catch(err => {
+    dispatch(addShowsError(err))
   })
 }
 
@@ -26,6 +28,9 @@ export const getShowById = (id) => (dispatch) => {
   axios.get(url)
     .then(({ data: show }) => {
       dispatch(addShowDetail(show))
+    }).catch(err => {
+      const error = (err.response) ? err.response.data : err.toJSON();
+      dispatch(addShowDetailError(error))
     })
 }
 
@@ -33,20 +38,30 @@ export const addShows = (shows) => ({
   type: types.addShows,
   payload: {
     shows
-  }
+  },
 });
 
 export const addShowDetail = (show) => ({
   type: types.addShowDetail,
   payload: {
     show
-  }
+  },
 });
 
 export const addShowsLoading = () => ({
-  type: types.addShowsLoading
+  type: types.addShowsLoading,
 });
 
 export const addShowDetailLoading = () => ({
-  type: types.addShowDetailLoading
+  type: types.addShowDetailLoading,
+});
+
+export const addShowsError = (error) => ({
+  type: types.addShowsError,
+  error,
+});
+
+export const addShowDetailError = (error) => ({
+  type: types.addShowDetailError,
+  error,
 });
